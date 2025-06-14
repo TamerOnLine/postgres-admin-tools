@@ -31,6 +31,13 @@ Make sure you have Git installed. [You can download it from](https://git-scm.com
 
 ---
 
+## 🎬 Demo
+
+![Demo](screenshots/demo.gif)  
+<sub>📸 Quick demo of the PostgreSQL Admin Tools in action</sub>
+
+---
+
 ## 🔧 Tech Stack
 
 | Technology     | Description                         |
@@ -83,7 +90,7 @@ SECRET_KEY=your_secret_here
 ```bash
 # Windows
 py -3.12 -m venv venv
-.\env\Scripts\ctivate
+.\venv\Scripts\ctivate
 ```
 ![venv](screenshots/venv.png)  
 <sub>📸 Virtual environment activated successfully</sub>
