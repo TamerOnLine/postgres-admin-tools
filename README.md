@@ -8,6 +8,18 @@ A lightweight admin interface and CLI toolkit for PostgreSQL, built with **Flask
 
 ---
 
+## 📥 Clone the Repository
+To get started, clone this repository to your local machine using Git:
+
+```bash
+git clone https://github.com/TamerOnLine/postgres-admin-tools.git
+cd postgres-admin-tools
+```
+Make sure you have Git installed. [You can download it from](https://git-scm.com).
+
+
+---
+
 ## 📦 Features
 
 - 🔐 Secure user system with Flask-Login (default admin: `admin/12345`)
