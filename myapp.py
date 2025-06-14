@@ -5,38 +5,57 @@ from flask_login import LoginManager
 from dotenv import load_dotenv
 from models.models_definitions import db, User
 
-# Load environment variables from a .env file
+# Load environment variables from .env file
 load_dotenv()
-
-# Create the Flask application instance
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", 'default_secret_key')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Bind SQLAlchemy to the Flask app
-db.init_app(app)
 
 # Initialize Flask-Login
 login_manager = LoginManager()
-login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-def load_user(user_id):
+def create_app():
     """
-    Callback to reload the user object from the user ID stored in the session.
-
-    Args:
-        user_id (int): The ID of the user to load.
+    Factory function to create and configure the Flask application.
 
     Returns:
-        User: An instance of the User model corresponding to the given user ID.
+        Flask: A configured Flask application instance.
     """
-    return User.query.get(int(user_id))
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", 'default_secret_key')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-login_manager.user_loader(load_user)
+    # Bind extensions to the application
+    db.init_app(app)
+    login_manager.init_app(app)
 
-# Create the database tables if they do not exist
-with app.app_context():
-    db.create_all()
-    print("User system is ready.")
+    @login_manager.user_loader
+    def load_user(user_id):
+        """
+        Load a user by ID.
+
+        Args:
+            user_id (int): The ID of the user to retrieve.
+
+        Returns:
+            User: The user instance if found, otherwise None.
+        """
+        return User.query.get(int(user_id))
+
+    @app.route("/")
+    def index():
+        """
+        Simple welcome page route.
+
+        Returns:
+            str: A welcome message.
+        """
+        return "Flask app is running!"
+
+    return app
+
+if __name__ == "__main__":
+    app = create_app()
+    with app.app_context():
+        db.create_all()
+        print("User system is ready.")
+    app.run(debug=True)
