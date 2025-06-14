@@ -57,12 +57,16 @@ SECRET_KEY=your_secret_here
 ## 🚀 Usage
 
 ### .env
-![venv](screenshots/venv.png)
+![venv](screenshots/env-setup.png)
+
+---
 
 ### تهيئة البيئة الافتراضية
 ```bash
 py -3.12 -m venv venv
 ```
+
+---
 
 #### win
 ```bash
@@ -70,10 +74,14 @@ py -3.12 -m venv venv
 ```
 ![venv](screenshots/venv.png)
 
+---
+
 #### Linux / macOS
 ```bash
 source venv/bin/activate
 ```
+
+---
 
 ### Create Database
 ```bash
@@ -81,11 +89,15 @@ py .\models\db_postgres\create.py
 ```
 ![Create](screenshots/create.png)
 
+---
+
 ### 2. Drop Database
 ```bash
 py .\models\db_postgres\drop.py 
 ```
 ![Drop](screenshots/drop.png)
+
+---
 
 ### 3. Drop Tables
 ```bash
@@ -93,51 +105,39 @@ py .\models\db_postgres\drop_table.py
 ```
 ![Drop Table](screenshots/drop_table.png)
 
+---
+
 ### Manage Tables
 ```bash
 py .\models\db_postgres\manage_tables.py 
 ```
 ![Manage Tables](screenshots/manage_tables.png)
 
+---
+
+### manage tables
+```bash
+py .\models\db_postgres\manage_tables.py
+```
+![Manage Tables](screenshots/manage_tables.png)
+
+---
+
 ### BACKUP
 ```bash
 py .\models\db_postgres\BACKUP.py
 ```
-![Manage Tables](screenshots/manage_tables.png)
+![Manage Tables](screenshots/BACKUP.png)
+
+---
 
 ### RESTORE
 ```bash
 py .\models\db_postgres\RESTORE.py 
 ```
-![Manage Tables](screenshots/manage_tables.png)
-
-
-
-
-
-
-
-
-![Env Setup](screenshots/env-setup.png)
-
-### 7. النسخ الاحتياطي لقاعدة البيانات
-```bash
-py .\models\db_postgres\BACKUP.py
-```
-![Backup](screenshots/BACKUP.png)
-
-### 8. استعادة قاعدة البيانات
-```bash
-py .\models\db_postgres\BACKUP.py
-```
-![Restore](screenshots/RESTORE.png)
+![Manage Tables](screenshots/RESTORE.png)
 
 ---
-
-
-
-
-
 
 ## 🛡️ User System
 
@@ -161,12 +161,7 @@ You can change this behavior in `models/models_definitions.py`.
 | 💾 Backup Database         | `BACKUP.py`     | CLI             |
 | ♻️ Restore from Backup     | `RESTORE.py`    | Interactive CLI |
 
-
 ---
-
-
----
-
 
 ## 🧪 Test Mode (SQLite)
 
@@ -174,7 +169,6 @@ When running `models_definitions.py` directly, if `DATABASE_URL` is not defined,
 the system falls back to SQLite (`sqlite:///test.db`) for quick testing.
 
 > Note: Other scripts (like `create.py`) require a PostgreSQL connection and do not support SQLite.
-
 
 ---
 
