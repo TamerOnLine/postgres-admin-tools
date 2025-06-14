@@ -115,7 +115,7 @@ pip install -r requirements.txt
 ### 3. Create Database
 
 ```bash
-py models/db_postgres/create.py
+py .\models\db_postgres\create.py
 ```
 
 ![Create](screenshots/create.png)  
@@ -126,7 +126,7 @@ py models/db_postgres/create.py
 ### 4. Drop Database
 
 ```bash
-py models/db_postgres/drop.py
+py .\models\db_postgres\drop.py
 ```
 
 ![Drop](screenshots/drop.png)  
@@ -137,7 +137,7 @@ py models/db_postgres/drop.py
 ### 5. Drop Tables
 
 ```bash
-py models/db_postgres/drop_table.py
+py .\models\db_postgres\drop_table.py
 ```
 
 ![Drop Table](screenshots/drop_table.png)  
@@ -148,7 +148,7 @@ py models/db_postgres/drop_table.py
 ### 6. Manage Tables
 
 ```bash
-py models/db_postgres/manage_tables.py
+py .\models\db_postgres\manage_tables.py
 ```
 
 ![Manage Tables](screenshots/manage_tables.png)  
@@ -159,7 +159,7 @@ py models/db_postgres/manage_tables.py
 ### 7. Backup Database
 
 ```bash
-py models/db_postgres/BACKUP.py
+py .\models\db_postgres\BACKUP.py
 ```
 
 ![Manage Tables](screenshots/BACKUP.png)  
@@ -170,7 +170,7 @@ py models/db_postgres/BACKUP.py
 ### 8. Restore Database
 
 ```bash
-py models/db_postgres/RESTORE.py
+py .\models\db_postgres\RESTORE.py
 ```
 
 ![Manage Tables](screenshots/RESTORE.png)  
@@ -180,13 +180,24 @@ py models/db_postgres/RESTORE.py
 
 ## 🛡️ User System
 
-The system auto-creates a default admin user on first run if not found:
+The system automatically creates a **default admin user** on first run if no user with username `admin` is found.
 
-- **Username**: `admin`
+- **Username**: `admin`  
 - **Password**: `12345`
 
-You can modify this in `models/models_definitions.py`.
+To manually trigger this, run the following command:
 
+```bash
+py .\models\db_postgres\models_definitions.py
+```
+
+You can modify this logic in [`models/models_definitions.py`](models/models_definitions.py).
+
+<div align="center">
+  <img src="screenshots/models_definitions.png" alt="models definitions" width="600"/>
+  <br>
+  <sub>📸 Restoring database from SQL file</sub>
+</div>
 ---
 
 ## 🧪 SQLite Test Mode

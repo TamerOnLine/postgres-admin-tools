@@ -15,7 +15,6 @@ class User(db.Model, UserMixin):
         username (str): Unique username.
         password_hash (str): Hashed password.
         role (str): Role of the user (e.g., user, admin).
-        products (list): List of products associated with the user.
         created_at (datetime): Account creation timestamp.
     """
 
@@ -26,34 +25,18 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.Text, nullable=False)
     role = db.Column(db.String(20), default='user')
-    products = db.relationship('Product', backref='merchant', lazy=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def set_password(self, password):
-        """Generate and store a password hash.
-
-        Args:
-            password (str): The plaintext password to hash.
-        """
+        """Generate and store a password hash."""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        """Verify the provided password against the stored hash.
-
-        Args:
-            password (str): The plaintext password to verify.
-
-        Returns:
-            bool: True if the password matches, False otherwise.
-        """
+        """Verify the provided password against the stored hash."""
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        """Return a string representation of the user."""
         return f'<User {self.username}>'
-
-
-
 
 
 if __name__ == '__main__':
@@ -70,12 +53,9 @@ if __name__ == '__main__':
         db.create_all()
         print("✅ Tables created.")
 
-
         if not User.query.filter_by(username="admin").first():
             user = User(username="admin", email="admin@example.com", role="admin")
             user.set_password("12345")
             db.session.add(user)
             db.session.commit()
             print("👤 Admin user created.")
-
-
