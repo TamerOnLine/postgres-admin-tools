@@ -17,7 +17,6 @@ cd postgres-admin-tools
 ```
 Make sure you have Git installed. [You can download it from](https://git-scm.com).
 
-
 ---
 
 ## 📦 Features
@@ -102,8 +101,6 @@ py -3.12 -m venv venv
 python3 -m venv venv
 source venv/bin/activate
 ```
-
-
 
 ---
 
