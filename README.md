@@ -1,6 +1,9 @@
 
 # 🛠️ PostgreSQL Admin Tools
 
+![Build Status](https://github.com/TamerOnLine/postgres-admin-tools/actions/workflows/python-app.yml/badge.svg)
+
+
 A lightweight Python-based admin panel and command-line toolkit for managing PostgreSQL databases and tables using **Flask**, **SQLAlchemy**, and **psycopg2**.
 
 ---
@@ -50,33 +53,64 @@ SECRET_KEY=your_secret_here
 
 ---
 
-## 🚀 Quick Start
 
-### 1. Install dependencies
+## 🚀 Usage
 
+### 1. تهيئة البيئة الافتراضية
 ```bash
-pip install -r requirements.txt
+py -3.12 -m venv venv
 ```
 
-### 2. Create the database (if it doesn't exist)
+![venv](images/venv.png)
+
+### 1. Create Database
 
 ```bash
 python models/db_postgres/create.py
 ```
+![Create](images/create.png)
 
-### 3. Create tables
+### 2. Drop Database
+
+```bash
+python models/db_postgres/drop.py
+```
+![Drop](images/drop.png)
+
+### 3. Drop Tables
+
+```bash
+python models/db_postgres/drop_table.py
+```
+![Drop Table](images/drop_table.png)
+
+### 4. Manage Tables
 
 ```bash
 python models/db_postgres/manage_tables.py
 ```
+![Manage Tables](images/manage_tables.png)
 
-### 4. Run the Flask app
 
-```bash
-python myapp.py
-```
+
+
+
+### 6. إعداد ملف البيئة
+![Env Setup](images/env-setup.png)
+
+### 7. النسخ الاحتياطي لقاعدة البيانات
+![Backup](images/BACKUP.png)
+
+
+### 8. استعادة قاعدة البيانات
+![Restore](images/RESTORE.png)
 
 ---
+
+
+
+
+
 
 ## 🛡️ User System
 

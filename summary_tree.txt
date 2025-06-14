@@ -1,0 +1,32 @@
+📁 postgres-admin-tools/
+├── 📁 .github/
+│   └── 📁 workflows/
+│       └── python-app.yml
+├── 📁 backups/
+│   ├── mydatabase_backup_2025-06-14_09-10-08.sql
+│   ├── mydatabase_backup_2025-06-14_09-10-09.sql
+│   ├── mydatabase_backup_2025-06-14_09-10-11.sql
+│   ├── mydatabase_backup_2025-06-14_09-10-16.sql
+│   └── mydatabase_backup_2025-06-14_09-10-18.sql
+├── 📁 models/
+│   ├── 📁 db_postgres/
+│   │   ├── BACKUP.py
+│   │   ├── RESTORE.py
+│   │   ├── __init__.py
+│   │   ├── create.py
+│   │   ├── db_config.py
+│   │   ├── drop.py
+│   │   ├── drop_table.py
+│   │   ├── manage_tables.py
+│   │   └── test.py
+│   ├── README.md
+│   ├── __init__.py
+│   └── models_definitions.py
+├── 📁 screenshots/
+│   └── env-setup.png
+├── .env
+├── .gitignore
+├── LICENSE
+├── README.md
+├── myapp.py
+└── requirements.txt

@@ -40,33 +40,7 @@ DATABASE_URL=postgresql://username:password@localhost:5432/dbname
 
 ---
 
-## 🚀 Usage
 
-### Create Database
-
-```bash
-python db_postgres/create.py
-```
-
-### Drop Database
-
-```bash
-python db_postgres/drop.py
-```
-
-### Drop Tables
-
-```bash
-python db_postgres/drop_table.py
-```
-
-### Manage Tables
-
-```bash
-python db_postgres/manage_tables.py
-```
-
----
 
 ## ⚙️ Configuration
 

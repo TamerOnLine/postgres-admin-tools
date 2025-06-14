@@ -7,8 +7,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 
 from myapp import create_app
 from models.models_definitions import db
+from dotenv import load_dotenv
+
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+load_dotenv()  
 
 def is_production_environment() -> bool:
     """
