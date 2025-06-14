@@ -91,24 +91,29 @@ You can change this behavior in `models/models_definitions.py`.
 
 ## 🧰 Database Tools
 
-| Operation | Script |
-|----------|--------|
-| 🏗️ Create Database         | `create.py` |
-| 🧨 Drop Database           | `drop.py` |
-| 🧹 Drop Tables             | `drop_table.py` |
-| 🧩 Manage Tables (CLI)     | `manage_tables.py` |
-| 💾 Backup Database         | `BACKUP.py` |
-| ♻️ Restore from Backup     | `RESTORE.py` |
+| Operation                  | Script         | Mode            |
+|---------------------------|----------------|-----------------|
+| 🏗️ Create Database         | `create.py`     | CLI             |
+| 🧨 Drop Database           | `drop.py`       | CLI             |
+| 🧹 Drop Tables             | `drop_table.py` | Interactive CLI |
+| 🧩 Manage Tables (CLI)     | `manage_tables.py` | Interactive CLI |
+| 💾 Backup Database         | `BACKUP.py`     | CLI             |
+| ♻️ Restore from Backup     | `RESTORE.py`    | Interactive CLI |
+
 
 ---
 
-## 🧪 Test Mode
 
-By default, if `DATABASE_URL` is not set, it falls back to SQLite for testing:
+---
 
-```env
-DATABASE_URL=sqlite:///test.db
-```
+
+## 🧪 Test Mode (SQLite)
+
+When running `models_definitions.py` directly, if `DATABASE_URL` is not defined,
+the system falls back to SQLite (`sqlite:///test.db`) for quick testing.
+
+> Note: Other scripts (like `create.py`) require a PostgreSQL connection and do not support SQLite.
+
 
 ---
 
