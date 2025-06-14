@@ -77,18 +77,21 @@ The tool reads the PostgreSQL connection string from a `.env` file via the `DATA
 ## 📂 Project Structure
 
 ```
-.
-├── models.txt
-├── models_definitions.py
+tameronline-postgres-admin-tools/
+├── myapp.py                  # Flask app with login & DB integration
+├── requirements.txt
+├── LICENSE
 ├── README.md
-├── __init__.py
-└── db_postgres/
-    ├── create.py
-    ├── db_config.py
-    ├── drop.py
-    ├── drop_table.py
-    ├── manage_tables.py
-    └── __init__.py
+└── models/
+    ├── models_definitions.py # SQLAlchemy models (User, etc.)
+    ├── db_postgres/
+    │   ├── create.py         # Create DB if not exists
+    │   ├── drop.py           # Drop DB after terminating connections
+    │   ├── drop_table.py     # Drop individual or all tables
+    │   ├── manage_tables.py  # CLI to recreate or patch schema
+    │   ├── BACKUP.py         # Dump DB to timestamped SQL file
+    │   ├── RESTORE.py        # Restore DB from backup
+    │   └── db_config.py      # Environment-based DB config
 ```
 
 ---
