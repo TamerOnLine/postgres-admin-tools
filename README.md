@@ -73,15 +73,18 @@ SECRET_KEY=your_secret_here
 py -3.12 -m venv venv
 .\env\Scripts\ctivate
 ```
-
+![venv](screenshots/venv.png)  
+<sub>📸 Virtual environment activated successfully</sub>
 ```bash
+
+---
+
 # macOS / Linux
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-![venv](screenshots/venv.png)  
-<sub>📸 Virtual environment activated successfully</sub>
+
 
 ---
 
