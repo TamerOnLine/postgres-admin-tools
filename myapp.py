@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from dotenv import load_dotenv
 from models.models_definitions import db, User
+from models.db_postgres.db_config import get_database_credentials
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,7 +21,13 @@ def create_app():
         Flask: A configured Flask application instance.
     """
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+
+    # Get DB credentials from either DATABASE_URL or DB_* vars
+    creds = get_database_credentials()
+    database_uri = (
+        f"postgresql://{creds['user']}:{creds['password']}@{creds['host']}:{creds['port']}/{creds['dbname']}"
+    )
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", 'default_secret_key')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
