@@ -83,20 +83,20 @@ SECRET_KEY=your_secret_here
 ---
 
 ## 🚀 Quick Start
-
 ### 1. Create Virtual Environment
-
 ```bash
 # Windows
 py -3.12 -m venv venv
-.\venv\Scripts\ctivate
+.\env\Scripts\Activate
 ```
-![venv](screenshots/venv.png)  
+<div align="center">
+  <img src="screenshots/venv.png" alt="models definitions" width="600"/>
+</div>
 <sub>📸 Virtual environment activated successfully</sub>
-```bash
 
 ---
 
+```bash
 # macOS / Linux
 python3 -m venv venv
 source venv/bin/activate
@@ -104,76 +104,86 @@ source venv/bin/activate
 
 ---
 
-### 2. Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+<div align="center">
+  <img src="screenshots/pip_install.png" alt="models definitions" width="600"/>
+</div>
+<sub>📸 Installing dependencies using pip </sub>
 
 ---
 
-### 3. Create Database
+### Create Database
 
 ```bash
 py .\models\db_postgres\create.py
 ```
-
-![Create](screenshots/create.png)  
+<div align="center">
+  <img src="screenshots/mcreate.png" alt="models definitions" width="600"/>
+</div> 
 <sub>📸 Creating PostgreSQL database</sub>
 
 ---
 
-### 4. Drop Database
+### Drop Database
 
 ```bash
 py .\models\db_postgres\drop.py
 ```
-
-![Drop](screenshots/drop.png)  
+<div align="center">
+  <img src="screenshots/drop.png" alt="models definitions" width="600"/>
+</div>
 <sub>📸 Dropping the database safely</sub>
 
 ---
 
-### 5. Drop Tables
+### Drop Tables
 
 ```bash
 py .\models\db_postgres\drop_table.py
 ```
-
-![Drop Table](screenshots/drop_table.png)  
+<div align="center">
+  <img src="screenshots/drop_table.png" alt="models definitions" width="600"/>
+</div>
 <sub>📸 Dropping selected or all tables</sub>
 
 ---
 
-### 6. Manage Tables
+### Manage Tables
 
 ```bash
 py .\models\db_postgres\manage_tables.py
 ```
-
-![Manage Tables](screenshots/manage_tables.png)  
+<div align="center">
+  <img src="screenshots/manage_tables.png" alt="models definitions" width="600"/>
+</div>
 <sub>📸 CLI interface to manage tables (create or sync)</sub>
 
 ---
 
-### 7. Backup Database
+### Backup Database
 
 ```bash
 py .\models\db_postgres\BACKUP.py
 ```
-
-![Manage Tables](screenshots/BACKUP.png)  
+<div align="center">
+  <img src="screenshots/BACKUP.png" alt="models definitions" width="600"/>
+</div>
 <sub>📸 Generating SQL backup file using `pg_dump`</sub>
 
 ---
 
-### 8. Restore Database
+### Restore Database
 
 ```bash
 py .\models\db_postgres\RESTORE.py
 ```
-
-![Manage Tables](screenshots/RESTORE.png)  
+<div align="center">
+  <img src="screenshots/RESTORE.png" alt="models definitions" width="600"/>
+</div>
 <sub>📸 Restoring database from SQL file</sub>
 
 ---
@@ -181,23 +191,20 @@ py .\models\db_postgres\RESTORE.py
 ## 🛡️ User System
 
 The system automatically creates a **default admin user** on first run if no user with username `admin` is found.
-
 - **Username**: `admin`  
 - **Password**: `12345`
 
 To manually trigger this, run the following command:
 
 ```bash
-py .\models\db_postgres\models_definitions.py
+py .\models\models_definitions.py
 ```
-
 You can modify this logic in [`models/models_definitions.py`](models/models_definitions.py).
-
 <div align="center">
   <img src="screenshots/models_definitions.png" alt="models definitions" width="600"/>
-  <br>
-  <sub>📸 Restoring database from SQL file</sub>
-</div>
+</div> 
+<sub>📸 Creating default admin user if not exists</sub>
+
 ---
 
 ## 🧪 SQLite Test Mode
@@ -232,5 +239,3 @@ See the [LICENSE](./LICENSE) file for details.
 
 **Tamer Hamad Faour**  
 GitHub: [@TamerOnLine](https://github.com/TamerOnLine)
-
----
