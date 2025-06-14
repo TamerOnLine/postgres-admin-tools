@@ -27,8 +27,8 @@ A Python-based utility for managing PostgreSQL databases. This tool offers opera
 ## 🛆 Installation
 
 ```bash
-git clone https://your-repo-url
-cd your-repo-directory
+git clone https://github.com/TamerOnLine/postgres-admin-tools.git
+cd postgres-admin-tools
 pip install -r requirements.txt
 ```
 
@@ -96,12 +96,14 @@ tameronline-postgres-admin-tools/
 
 ---
 
-## 🧾 License
+## 📝 License
 
-MIT License
+This project is licensed under the MIT License.  
+See the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## 👨‍💼 Author
+## 👨‍💻 Author
 
-* **Your Name** - \[[your.email@example.com](mailto:your.email@example.com) or GitHub profile]
+**Tamer Hamad Faour**  
+GitHub: [@TamerOnLine](https://github.com/TamerOnLine)
