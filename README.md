@@ -56,54 +56,81 @@ SECRET_KEY=your_secret_here
 
 ## 🚀 Usage
 
-### 1. تهيئة البيئة الافتراضية
+### .env
+![venv](screenshots/venv.png)
+
+### تهيئة البيئة الافتراضية
 ```bash
 py -3.12 -m venv venv
 ```
 
-![venv](images/venv.png)
-
-### 1. Create Database
-
+#### win
 ```bash
-python models/db_postgres/create.py
+.\venv\Scripts\activate
 ```
-![Create](images/create.png)
+![venv](screenshots/venv.png)
+
+#### Linux / macOS
+```bash
+source venv/bin/activate
+```
+
+### Create Database
+```bash
+py .\models\db_postgres\create.py
+```
+![Create](screenshots/create.png)
 
 ### 2. Drop Database
-
 ```bash
-python models/db_postgres/drop.py
+py .\models\db_postgres\drop.py 
 ```
-![Drop](images/drop.png)
+![Drop](screenshots/drop.png)
 
 ### 3. Drop Tables
-
 ```bash
-python models/db_postgres/drop_table.py
+py .\models\db_postgres\drop_table.py 
 ```
-![Drop Table](images/drop_table.png)
+![Drop Table](screenshots/drop_table.png)
 
-### 4. Manage Tables
-
+### Manage Tables
 ```bash
-python models/db_postgres/manage_tables.py
+py .\models\db_postgres\manage_tables.py 
 ```
-![Manage Tables](images/manage_tables.png)
+![Manage Tables](screenshots/manage_tables.png)
+
+### BACKUP
+```bash
+py .\models\db_postgres\BACKUP.py
+```
+![Manage Tables](screenshots/manage_tables.png)
+
+### RESTORE
+```bash
+py .\models\db_postgres\RESTORE.py 
+```
+![Manage Tables](screenshots/manage_tables.png)
 
 
 
 
 
-### 6. إعداد ملف البيئة
-![Env Setup](images/env-setup.png)
+
+
+
+![Env Setup](screenshots/env-setup.png)
 
 ### 7. النسخ الاحتياطي لقاعدة البيانات
-![Backup](images/BACKUP.png)
-
+```bash
+py .\models\db_postgres\BACKUP.py
+```
+![Backup](screenshots/BACKUP.png)
 
 ### 8. استعادة قاعدة البيانات
-![Restore](images/RESTORE.png)
+```bash
+py .\models\db_postgres\BACKUP.py
+```
+![Restore](screenshots/RESTORE.png)
 
 ---
 
