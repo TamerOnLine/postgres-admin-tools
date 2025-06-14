@@ -71,7 +71,7 @@ SECRET_KEY=your_secret_here
 ```bash
 # Windows
 py -3.12 -m venv venv
-.env\Scriptsctivate
+.\env\Scripts\ctivate
 ```
 
 ```bash
