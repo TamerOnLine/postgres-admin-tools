@@ -15,7 +15,12 @@ To get started, clone this repository to your local machine using Git:
 git clone https://github.com/TamerOnLine/postgres-admin-tools.git
 cd postgres-admin-tools
 ```
-Make sure you have Git installed. [You can download it from](https://git-scm.com).
+- Make sure you have Git installed.
+- [You can download it from](https://git-scm.com).
+<div align="center">
+  <img src="screenshots/github.png" alt="models definitions" width="600"/>
+</div>
+<sub>📸 Cloning the repository via Git command line </sub>
 
 ---
 
@@ -122,7 +127,7 @@ pip install -r requirements.txt
 py .\models\db_postgres\create.py
 ```
 <div align="center">
-  <img src="screenshots/mcreate.png" alt="models definitions" width="600"/>
+  <img src="screenshots/create.png" alt="models definitions" width="600"/>
 </div> 
 <sub>📸 Creating PostgreSQL database</sub>
 
