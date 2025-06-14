@@ -37,8 +37,12 @@ cd postgres-admin-tools
 
 ## 🎬 Demo
 
-![Demo](screenshots/demo.gif)  
-<sub>📸 Quick demo of the PostgreSQL Admin Tools in action</sub>
+
+<div align="center">
+  <img src="screenshots/demo.gif" alt="PostgreSQL Admin Tools demo" width="600"/>
+</div>
+<sub>📽️ Quick demo of the PostgreSQL Admin Tools in action</sub>
+
 
 ---
 
