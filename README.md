@@ -96,7 +96,7 @@ SECRET_KEY=your_secret_here
 ```bash
 # Windows
 py -3.12 -m venv venv
-.\env\Scripts\Activate
+.\venv\Scripts\Activate
 ```
 <div align="center">
   <img src="screenshots/venv.png" alt="models definitions" width="600"/>
