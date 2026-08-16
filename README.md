@@ -1,250 +1,183 @@
-# 🛠️ PostgreSQL Admin Tools
+# PostgreSQL Admin Tools
 
-![Build Status](https://github.com/TamerOnLine/postgres-admin-tools/actions/workflows/python-app.yml/badge.svg)
+A Python toolkit for PostgreSQL administration with database creation, deletion, schema management, backup, and restore utilities. The repository also contains a minimal Flask application foundation built with Flask-SQLAlchemy and Flask-Login.
 
-A lightweight admin interface and CLI toolkit for PostgreSQL, built with **Flask**, **SQLAlchemy**, and **psycopg2**.
+> [!IMPORTANT]
+> This is a development and reference project, not a production-ready administration panel. Authentication routes and authorization controls are not yet implemented. Do not expose the Flask application to the public internet.
 
-> Manage your databases and tables with ease – via web or terminal.
+## Features
 
----
+- Validated PostgreSQL configuration through environment variables
+- Database creation with safely quoted identifiers
+- Explicitly confirmed database deletion
+- SQL backup with `pg_dump`
+- Confirmed restore with `psql`
+- Table creation, synchronization, and deletion utilities
+- SQLAlchemy user model with password hashing
+- Flask application factory
+- GitHub Actions workflow
 
-## 📥 Clone the Repository
-To get started, clone this repository to your local machine using Git:
+## Security changes
 
-```bash
+The project intentionally has:
+
+- no default administrator account
+- no hardcoded administrator password
+- no fallback Flask secret key
+- no fallback database username or password
+- Debug mode disabled unless explicitly enabled
+- database credentials scoped to backup and restore subprocesses
+- stronger confirmation for destructive operations
+
+## Requirements
+
+- Python 3.10+
+- PostgreSQL client tools
+- `pg_dump` and `psql` available on PATH, or installed in a supported Windows PostgreSQL location
+
+## Setup
+
+### 1. Clone the repository
+
+~~~bash
 git clone https://github.com/TamerOnLine/postgres-admin-tools.git
 cd postgres-admin-tools
-```
-- Make sure you have Git installed.
-- [You can download it from](https://git-scm.com).
-<div align="center">
-  <img src="screenshots/github.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Cloning the repository via Git command line </sub>
+~~~
 
----
+### 2. Create a virtual environment
 
-## 📦 Features
+~~~bash
+python -m venv .venv
+~~~
 
-- 🔐 Secure user system with Flask-Login (default admin: `admin/12345`)
-- ⚙️ Create or drop PostgreSQL databases
-- 🧱 Manage tables (create / migrate / drop) via SQLAlchemy
-- 💾 Full database backup & restore using `pg_dump` / `psql`
-- 🧩 Easy environment config via `.env` file
-- 🌐 Flask-based web UI ready out of the box
+Activate it:
 
----
+~~~bash
+# Linux or macOS
+source .venv/bin/activate
 
-## 🎬 Demo
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+~~~
 
+### 3. Install dependencies
 
-<div align="center">
-  <img src="screenshots/demo.gif" alt="PostgreSQL Admin Tools demo" width="600"/>
-</div>
-<sub>📽️ Quick demo of the PostgreSQL Admin Tools in action</sub>
-
-
----
-
-## 🔧 Tech Stack
-
-| Technology     | Description                         |
-|----------------|-------------------------------------|
-| Python         | Core programming language           |
-| PostgreSQL     | Relational database engine          |
-| SQLAlchemy     | ORM for database modeling           |
-| psycopg2       | PostgreSQL driver for Python        |
-| python-dotenv  | Load `.env` variables into runtime  |
-
----
-
-## 🧱 Project Structure
-
-```
-postgres-admin-tools/
-├── myapp.py                  # Flask app with login & DB panel
-├── requirements.txt
-├── LICENSE
-├── README.md
-└── models/
-    ├── models_definitions.py # SQLAlchemy models
-    └── db_postgres/
-        ├── create.py         # Create DB if not exists
-        ├── drop.py           # Drop DB (safe disconnect)
-        ├── drop_table.py     # Drop individual/all tables
-        ├── manage_tables.py  # Schema updates
-        ├── BACKUP.py         # Backup to SQL file
-        ├── RESTORE.py        # Restore from backup
-        └── db_config.py      # Load from .env
-```
-
----
-
-## ⚙️ Environment Setup
-
-Create a `.env` file in the root directory:
-
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/your_db
-SECRET_KEY=your_secret_here
-```
-
----
-
-## 🚀 Quick Start
-### 1. Create Virtual Environment
-```bash
-# Windows
-py -3.12 -m venv venv
-.\venv\Scripts\Activate
-```
-<div align="center">
-  <img src="screenshots/venv.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Virtual environment activated successfully</sub>
-
----
-
-```bash
-# macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
----
-
-### Install Dependencies
-
-```bash
+~~~bash
 pip install -r requirements.txt
-```
-<div align="center">
-  <img src="screenshots/pip_install.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Installing dependencies using pip </sub>
+~~~
 
----
+### 4. Configure the environment
 
-### Create Database
+~~~bash
+cp .env.example .env
+~~~
 
-```bash
-py .\models\db_postgres\create.py
-```
-<div align="center">
-  <img src="screenshots/create.png" alt="models definitions" width="600"/>
-</div> 
-<sub>📸 Creating PostgreSQL database</sub>
+Replace every placeholder in `.env`. Never commit the resulting `.env` file.
 
----
+You may configure PostgreSQL with one complete URL:
 
-### Drop Database
+~~~env
+DATABASE_URL=postgresql://user:password@localhost:5432/database_name
+~~~
 
-```bash
-py .\models\db_postgres\drop.py
-```
-<div align="center">
-  <img src="screenshots/drop.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Dropping the database safely</sub>
+Or with individual variables:
 
----
+~~~env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=database_name
+DB_USER=database_user
+DB_PASSWORD=use-a-strong-password
+~~~
 
-### Drop Tables
+Generate a Flask secret:
 
-```bash
-py .\models\db_postgres\drop_table.py
-```
-<div align="center">
-  <img src="screenshots/drop_table.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Dropping selected or all tables</sub>
+~~~bash
+python -c "import secrets; print(secrets.token_hex(32))"
+~~~
 
----
+Store the result as `SECRET_KEY` in `.env`.
 
-### Manage Tables
+## Usage
 
-```bash
-py .\models\db_postgres\manage_tables.py
-```
-<div align="center">
-  <img src="screenshots/manage_tables.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 CLI interface to manage tables (create or sync)</sub>
+### Create the configured database
 
----
+~~~bash
+python models/db_postgres/create.py
+~~~
 
-### Backup Database
+### Manage tables
 
-```bash
-py .\models\db_postgres\BACKUP.py
-```
-<div align="center">
-  <img src="screenshots/BACKUP.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Generating SQL backup file using `pg_dump`</sub>
+~~~bash
+python models/db_postgres/manage_tables.py
+~~~
 
----
+### Back up the database
 
-### Restore Database
+~~~bash
+python models/db_postgres/BACKUP.py
+~~~
 
-```bash
-py .\models\db_postgres\RESTORE.py
-```
-<div align="center">
-  <img src="screenshots/RESTORE.png" alt="models definitions" width="600"/>
-</div>
-<sub>📸 Restoring database from SQL file</sub>
+Backups are stored in the ignored local `backups/` directory.
 
----
+### Restore a backup
 
-## 🛡️ User System
+~~~bash
+python models/db_postgres/RESTORE.py
+~~~
 
-The system automatically creates a **default admin user** on first run if no user with username `admin` is found.
-- **Username**: `admin`  
-- **Password**: `12345`
+The command requires typing `RESTORE` before applying the selected SQL file.
 
-To manually trigger this, run the following command:
+### Delete the configured database
 
-```bash
-py .\models\models_definitions.py
-```
-You can modify this logic in [`models/models_definitions.py`](models/models_definitions.py).
-<div align="center">
-  <img src="screenshots/models_definitions.png" alt="models definitions" width="600"/>
-</div> 
-<sub>📸 Creating default admin user if not exists</sub>
+~~~bash
+python models/db_postgres/drop.py
+~~~
 
----
+The command requires typing the exact configured database name before deletion.
 
-## 🧪 SQLite Test Mode
+### Run the Flask foundation
 
-If `DATABASE_URL` is not set in the `.env`, the system defaults to SQLite (`sqlite:///test.db`) for quick testing.
+~~~bash
+python myapp.py
+~~~
 
-> Note: Scripts like `create.py`, `BACKUP.py`, etc., require PostgreSQL and do not support SQLite.
+This creates the database tables and starts the minimal application. It does not provide a completed login or administration interface.
 
----
+## Project structure
 
-## 📋 CLI Command Summary
+~~~text
+postgres-admin-tools/
+├── .env.example
+├── .github/workflows/
+├── models/
+│   ├── models_definitions.py
+│   └── db_postgres/
+│       ├── BACKUP.py
+│       ├── RESTORE.py
+│       ├── create.py
+│       ├── db_config.py
+│       ├── drop.py
+│       ├── drop_table.py
+│       └── manage_tables.py
+├── myapp.py
+├── requirements.txt
+└── README.md
+~~~
 
-| Operation             | Script              | Mode            |
-|----------------------|---------------------|-----------------|
-| 🏗️ Create Database     | `create.py`          | CLI             |
-| ❌ Drop Database       | `drop.py`            | CLI             |
-| 🧹 Drop Tables         | `drop_table.py`      | Interactive CLI |
-| 🧩 Manage Tables       | `manage_tables.py`   | Interactive CLI |
-| 💾 Backup Database     | `BACKUP.py`          | CLI             |
-| ♻️ Restore from Backup | `RESTORE.py`         | Interactive CLI |
+## Production readiness
 
----
+Before production use, add and test:
 
-## 📄 License
+- login, logout, and administrator provisioning workflows
+- route-level authorization
+- CSRF protection for web forms
+- secure session-cookie settings
+- dependency version locking and automated security updates
+- automated tests for destructive database operations
+- structured audit logging
+- deployment behind TLS and a production WSGI server
 
-This project is licensed under the MIT License.  
-See the [LICENSE](./LICENSE) file for details.
+## License
 
----
-
-## 👨‍💻 Author
-
-**Tamer Hamad Faour**  
-GitHub: [@TamerOnLine](https://github.com/TamerOnLine)
+Released under the MIT License. See [LICENSE](LICENSE).
