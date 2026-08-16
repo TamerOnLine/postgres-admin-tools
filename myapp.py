@@ -1,68 +1,58 @@
 import os
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from dotenv import load_dotenv
-from models.models_definitions import db, User
-from models.db_postgres.db_config import get_database_credentials
 
-# Load environment variables from .env file
+from dotenv import load_dotenv
+from flask import Flask
+from flask_login import LoginManager
+from sqlalchemy import URL
+
+from models.db_postgres.db_config import get_database_credentials
+from models.models_definitions import User, db
+
 load_dotenv()
 
-# Initialize Flask-Login
 login_manager = LoginManager()
-login_manager.login_view = 'login'
+login_manager.login_view = "login"
+
 
 def create_app():
-    """
-    Factory function to create and configure the Flask application.
-
-    Returns:
-        Flask: A configured Flask application instance.
-    """
+    """Create and configure the Flask application."""
     app = Flask(__name__)
 
-    # Get DB credentials from either DATABASE_URL or DB_* vars
-    creds = get_database_credentials()
-    database_uri = (
-        f"postgresql://{creds['user']}:{creds['password']}@{creds['host']}:{creds['port']}/{creds['dbname']}"
-    )
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
-    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", 'default_secret_key')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    secret_key = os.getenv("SECRET_KEY")
+    if not secret_key:
+        raise RuntimeError("SECRET_KEY must be set in the environment.")
 
-    # Bind extensions to the application
+    creds = get_database_credentials()
+    app.config["SQLALCHEMY_DATABASE_URI"] = URL.create(
+        "postgresql+psycopg2",
+        username=creds["user"],
+        password=creds["password"],
+        host=creds["host"],
+        port=int(creds["port"]),
+        database=creds["dbname"],
+    )
+    app.config["SECRET_KEY"] = secret_key
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
     db.init_app(app)
     login_manager.init_app(app)
 
     @login_manager.user_loader
     def load_user(user_id):
-        """
-        Load a user by ID.
-
-        Args:
-            user_id (int): The ID of the user to retrieve.
-
-        Returns:
-            User: The user instance if found, otherwise None.
-        """
-        return User.query.get(int(user_id))
+        return db.session.get(User, int(user_id))
 
     @app.route("/")
     def index():
-        """
-        Simple welcome page route.
-
-        Returns:
-            str: A welcome message.
-        """
         return "Flask app is running!"
 
     return app
+
 
 if __name__ == "__main__":
     app = create_app()
     with app.app_context():
         db.create_all()
-        print("User system is ready.")
-    app.run(debug=True)
+        print("Database tables are ready.")
+
+    debug_enabled = os.getenv("FLASK_DEBUG", "").lower() in {"1", "true", "yes"}
+    app.run(debug=debug_enabled)
